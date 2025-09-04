@@ -1,204 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TP Clients - Demo Interface</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f8;
-      margin: 0;
-      padding: 20px;
-    }
-    header {
-      background-color: #003366;
-      color: white;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    .controls button {
-      margin: 0 5px;
-      padding: 5px 10px;
-      background-color: #0073e6;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .controls button:hover {
-      background-color: #005bb5;
-    }
-    .container {
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-    label {
-      font-weight: bold;
-    }
-    input, select {
-      width: 95%;
-      padding: 5px;
-      margin-top: 5px;
-    }
-    .footer {
-      margin-top: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .timer {
-      font-weight: bold;
-      color: #333;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>TP_Unified : 1.0.9.9</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f6f7fb;
+            color: #393939;
+        }
+        .top-bar {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 4px 12px 2px 12px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .top-bar input[type="text"] {
+            width: 120px;
+            margin-right: 6px;
+            height: 24px;
+        }
+        .top-bar button {
+            margin-right: 6px;
+            height: 28px;
+            min-width: 48px;
+        }
+        .top-bar .idle-status {
+            background: #0047b3;
+            color: #fff;
+            font-weight: bold;
+            padding: 2px 18px;
+            border-radius: 3px;
+            margin: 0 10px;
+            min-width: 135px;
+            text-align: center;
+            border-left: 4px solid #23c900;
+            border-right: 4px solid #23c900;
+        }
+        .top-bar .right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+        .top-bar .sbi-logo {
+            height: 36px;
+            margin-left: 16px;
+        }
+        .header-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 13px;
+            background: #f7fafd;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 2px 18px 2px 0;
+            height: 30px;
+        }
+        .header-info .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .header-info .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #dbeafe;
+            margin-right: 8px;
+            display: inline-block;
+            text-align: center;
+            line-height: 36px;
+            font-size: 17px;
+            color: #4177fe;
+        }
+        .tp-client-bar {
+            background: #23293c;
+            color: #fff;
+            font-size: 13px;
+            padding: 4px 15px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .tp-clients-title {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 18px 0 10px 18px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .tp-clients-title img {
+            width: 34px;
+            margin-right: 8px;
+        }
+        .main-content {
+            background: #fff;
+            border-radius: 8px;
+            margin: 12px;
+            padding: 10px 0 16px 0;
+            box-shadow: 0 2px 6px rgba(41, 62, 110, 0.03);
+        }
+        .history-title {
+            text-align: right;
+            padding: 0 28px 8px 0;
+            font-size: 22px;
+            color: #3e5a8b;
+            font-weight: 400;
+        }
+        .form-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .form-col {
+            flex: 1 1 22%;
+            min-width: 220px;
+            margin-bottom: 16px;
+            margin-right: 8px;
+        }
+        .form-col label {
+            display: block;
+            font-size: 15px;
+            color: #b2b7c2;
+            margin-bottom: 4px;
+            letter-spacing: 0.01em;
+        }
+        .form-col input[type="text"] {
+            width: 100%;
+            padding: 8px 6px;
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+            background: #f7fafd;
+            font-size: 15px;
+        }
+        .form-col label.required::after {
+            content: '*';
+            color: #e75656;
+            margin-left: 2px;
+        }
+        .footer-bar {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            background: #23293c;
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 8px 2px 18px;
+            letter-spacing: 0.02em;
+            z-index: 100;
+        }
+        /* Scrollbar for main-content */
+        .main-content {
+            max-height: 78vh;
+            overflow-y: auto;
+        }
+        @media (max-width: 1200px) {
+            .form-section {
+                flex-direction: column;
+            }
+            .form-col {
+                min-width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">SBI Life - Telemart Siddi Sales</div>
-  <div class="controls">
-    <button>Dial</button>
-    <button>Hangup</button>
-    <button>Hold</button>
-    <button>Mute</button>
-    <button>Break</button>
-    <button>Swap</button>
-    <button>Logout</button>
-  </div>
-</header>
-
-<div class="container">
-  <div>
-    <label>LOTNAME</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>CASE_ID</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>POLICYNUMBER</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>INSTALLMENTPREMIUM</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>PRODUCTNAME</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>POLICYISSUEDATE</label><br>
-    <input type="date">
-  </div>
-  <div>
-    <label>POLICYTERM</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>POLICYTYPE</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>HOLDERPRESENTADDRESS</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>HOLDERPERMANENTADDRESS</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>HOLDERDOB</label><br>
-    <input type="date">
-  </div>
-  <div>
-    <label>HOLDERGENDER</label><br>
-    <select>
-      <option>Male</option>
-      <option>Female</option>
-      <option>Other</option>
-    </select>
-  </div>
-  <div>
-    <label>HOLDERPHONENO</label><br>
-    <input type="tel">
-  </div>
-  <div>
-    <label>HOLDEREMAILID</label><br>
-    <input type="email">
-  </div>
-  <div>
-    <label>HOLDERDESIGNATION</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>HOLDEREMPLOYER</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>POLICYPAIDUPSTATUS</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>POLICYPAIDUPDATE</label><br>
-    <input type="date">
-  </div>
-  <div>
-    <label>POLICYPAIDUPAMOUNT</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>BANKNAME</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>CHANNELNAME</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>CONTACTTYPE</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>CONTACTREASON</label><br>
-    <input type="text">
-  </div>
-  <div>
-    <label>CONTACTSTATUS</label><br>
-    <input type="text">
-  </div>
-</div>
-
-<div class="footer">
-  <div>
-    <label>DispositionCode</label>
-    <input type="text">
-    <label>CRMCode</label>
-    <input type="text">
-  </div>
-  <div class="timer" id="timer">Idle: 00:00:00</div>
-</div>
-
-<script>
-  let seconds = 0;
-  function updateTimer() {
-    seconds++;
-    const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
-    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-    const secs = String(seconds % 60).padStart(2, '0');
-    document.getElementById('timer').textContent = `Idle: ${hrs}:${mins}:${secs}`;
-  }
-  setInterval(updateTimer, 1000);
-</script>
-
+    <div class="top-bar">
+        <input type="text" placeholder="">
+        <button>Dial</button>
+        <button disabled>Hangup</button>
+        <button disabled>Hold</button>
+        <button disabled>3Way</button>
+        <span class="idle-status">Idle : 00:13:58</span>
+        <button>Break</button>
+        <button>Save</button>
+        <button>API</button>
+        <button>Script</button>
+        <button>Logout</button>
+        <div class="right">
+            <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/SBI_Life_Insurance_Company_Logo.png" class="sbi-logo" alt="SBI Life Logo">
+        </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; align-items: center; background: #fff; font-size:13px; padding: 0 18px 0 0; height:22px;">
+        <div style="flex:1; color:#888;">
+            DispositionCode: &nbsp;&nbsp;&nbsp; CRMCode:
+        </div>
+        <span style="color:#787878;">Thursday, September 4, 2025 11:52:27 am</span>
+    </div>
+    <div class="tp-client-bar">
+        Teleperformance Client
+    </div>
+    <div class="main-content">
+        <div class="tp-clients-title">
+            <img src="https://cdn-icons-png.flaticon.com/512/2972/2972121.png" alt="TP Clients" />
+            TP Clients
+            <div style="margin-left: auto; display: flex; align-items: center;">
+                <span style="font-size:16px; color:#3e5a8b; font-weight:400; margin-right: 12px;">Welcome! Sushil Sahu</span>
+                <span class="user-avatar">S</span>
+            </div>
+        </div>
+        <div class="history-title">History</div>
+        <form>
+            <div class="form-section">
+                <!-- COLUMN 1 -->
+                <div class="form-col">
+                    <label class="required">LOTNAME</label>
+                    <input type="text" />
+                    <label>INSTALLMENTPREMIUM</label>
+                    <input type="text" />
+                    <label>POLICYRISKCOMMENCEMEN</label>
+                    <input type="text" />
+                    <label>HOLDERPERSONNAME</label>
+                    <input type="text" />
+                    <label>POLICYSUMASSURED</label>
+                    <input type="text" />
+                    <label>POLICYISSUEDATE</label>
+                    <input type="text" />
+                    <label>BANKNAME</label>
+                    <input type="text" />
+                    <label>SERVICEBRANCHNAME</label>
+                    <input type="text" />
+                    <label>POLICYBENEFITTERM</label>
+                    <input type="text" />
+                    <label>CONTACTPOSTCODE</label>
+                    <input type="text" />
+                </div>
+                <!-- COLUMN 2 -->
+                <div class="form-col">
+                    <label>CASE_ID</label>
+                    <input type="text" />
+                    <label>PRODUCTNAME</label>
+                    <input type="text" />
+                    <label>POLICYPAYMENTMECHANISM</label>
+                    <input type="text" />
+                    <label>HOLDERPERSONGENDER</label>
+                    <input type="text" />
+                    <label>POLICYCURRENTSTATUS</label>
+                    <input type="text" />
+                    <label>PREMIUMFUP</label>
+                    <input type="text" />
+                    <label>BANKBRANCHNAME</label>
+                    <input type="text" />
+                    <label>POLICYTYPE</label>
+                    <input type="text" />
+                    <label>CONTACTCITY</label>
+                    <input type="text" />
+                    <label>CONTACTRESIDENCE</label>
+                    <input type="text" />
+                </div>
+                <!-- COLUMN 3 -->
+                <div class="form-col">
+                    <label class="required">POLICYNUMBER</label>
+                    <input type="text" />
+                    <label>PRODUCTPLAN</label>
+                    <input type="text" />
+                    <label>PREMIUMPAYMENTFREQUEN</label>
+                    <input type="text" />
+                    <label>HOLDERPERSONDOB</label>
+                    <input type="text" />
+                    <label>POLICYCURRENTSTATUSISSUE</label>
+                    <input type="text" />
+                    <label>POLICYANNUALIZEDPREMIUM</label>
+                    <input type="text" />
+                    <label>CHANNELNAME</label>
+                    <input type="text" />
+                    <label>POLICYPAYMENTTERM</label>
+                    <input type="text" />
+                    <label>CONTACTSTATE</label>
+                    <input type="text" />
+                    <label class="required">CONTACTMOBILE</label>
+                    <input type="text" />
+                </div>
+                <!-- COLUMN 4 (empty for spacing or add more fields if required) -->
+            </div>
+        </form>
+    </div>
+    <div class="footer-bar">
+        Agent Name : Sushil Sahu || User Id : SAHU.788@TELEPERFORMANCESBILIFE  |  Extention : 123214  |  Login Time : 00:50:49  |  Process Name : SBILife  |  LOB Type : Outbound |  Server IP : 10.200.142.144:8443
+    </div>
 </body>
 </html>
-
