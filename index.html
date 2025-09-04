@@ -1,1 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TP Clients - Demo Interface</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .controls button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      background-color: #0073e6;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .controls button:hover {
+      background-color: #005bb5;
+    }
+    .container {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select {
+      width: 95%;
+      padding: 5px;
+      margin-top: 5px;
+    }
+    .footer {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .timer {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SBI Life - Telemart Siddi Sales</div>
+  <div class="controls">
+    <button>Dial</button>
+    <button>Hangup</button>
+    <button>Hold</button>
+    <button>Mute</button>
+    <button>Break</button>
+    <button>Swap</button>
+    <button>Logout</button>
+  </div>
+</header>
+
+<div class="container">
+  <div>
+    <label>LOTNAME</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>CASE_ID</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>POLICYNUMBER</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>INSTALLMENTPREMIUM</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>PRODUCTNAME</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>POLICYISSUEDATE</label><br>
+    <input type="date">
+  </div>
+  <div>
+    <label>POLICYTERM</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>POLICYTYPE</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>HOLDERPRESENTADDRESS</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>HOLDERPERMANENTADDRESS</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>HOLDERDOB</label><br>
+    <input type="date">
+  </div>
+  <div>
+    <label>HOLDERGENDER</label><br>
+    <select>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div>
+    <label>HOLDERPHONENO</label><br>
+    <input type="tel">
+  </div>
+  <div>
+    <label>HOLDEREMAILID</label><br>
+    <input type="email">
+  </div>
+  <div>
+    <label>HOLDERDESIGNATION</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>HOLDEREMPLOYER</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>POLICYPAIDUPSTATUS</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>POLICYPAIDUPDATE</label><br>
+    <input type="date">
+  </div>
+  <div>
+    <label>POLICYPAIDUPAMOUNT</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>BANKNAME</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>CHANNELNAME</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>CONTACTTYPE</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>CONTACTREASON</label><br>
+    <input type="text">
+  </div>
+  <div>
+    <label>CONTACTSTATUS</label><br>
+    <input type="text">
+  </div>
+</div>
+
+<div class="footer">
+  <div>
+    <label>DispositionCode</label>
+    <input type="text">
+    <label>CRMCode</label>
+    <input type="text">
+  </div>
+  <div class="timer" id="timer">Idle: 00:00:00</div>
+</div>
+
+<script>
+  let seconds = 0;
+  function updateTimer() {
+    seconds++;
+    const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = `Idle: ${hrs}:${mins}:${secs}`;
+  }
+  setInterval(updateTimer, 1000);
+</script>
+
+</body>
+</html>
 
